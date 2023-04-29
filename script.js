@@ -2,6 +2,10 @@ const image = document.querySelector('img');
 const title = document.getElementById('title')
 const artist = document.getElementById('artist')
 const music = document.querySelector('audio');
+const progressContainer = document.getElementById('progress-container');
+const progress = document.getElementById('progress');
+const currentTimeEl = document.getElementById('current-time');
+const durationEl = document.getElementById('duration');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
@@ -83,7 +87,31 @@ function nextSong(){
     playSong()
 }
 
+// Update progress bar & time
+function updateProgressBar(e){
+    if (isPlaying){
+        const { duration, currentTime } = e.srcElement;
+        // Update progress bar width
+        const progressPercent = ( currentTime / duration ) * 100;
+        progress.style.width = `${progressPercent}%`;
+
+        // Calculate display for duration
+        const durationMinutes = Math.floor( duration / 60 );
+        let durationSeconds = Math.floor( duration % 60);
+
+        if ( durationSeconds < 10){
+            durationSeconds = `0${durationSeconds}`;
+        }
+
+        // Delay switching duration Element to avoid NaN
+        if (durationSeconds){
+            durationEl.textContent = `${durationMinutes}:${durationSeconds}`;
+        }
+    }
+}
+
 // Play or Pause Event Listener
 playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()))
 prevBtn.addEventListener('click', prevSong)
 nextBtn.addEventListener('click', nextSong)
+music.addEventListener('timeupdate', updateProgressBar)
