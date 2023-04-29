@@ -16,7 +16,6 @@ body{
 }
 
 .player-container {
-    border-style: solid;
     height: 500px;
     width: 400px;
     background: #e7e7e7;
@@ -46,8 +45,67 @@ h2 {
     margin: 0;
 }
 
+h3 {
+    margin: 0;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 100;
+    letter-spacing: 2px;
+}
+
+.progress-container {
+    background: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 40px 20px;
+    height: 4px;
+    width: 90%;
+}
+
+.progress {
+    background: #242323;
+    border-radius: 5px;
+    height: 100%;
+
+    /* change this to show progress */
+    width: 66%;
+    transition: width 0.1s linear;
+}
+
+.duration-wrapper {
+    position: relative;
+    top: -25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-controls{
+    display: flex;
+    justify-content: center;
+}
+
+#prev{
+    margin-left: 30px;
+}
+
+.fas {
+    font-size: 30px;
+    color: rgb(129, 129, 129);
+    margin-right: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.fas:hover {
+    filter: brightness(80%);
+}
+
 /* Media Query: iPhone(Vertical) */
 @media screen and (max-width: 376px) {
+    .player-container{
+        width: 95vw;
+    }
+
     .img-container{
         left: 29px;
     }
@@ -58,5 +116,10 @@ h2 {
 
     h3{
         font-size: 15px;
+    }
+
+    .player-controls{
+        top: -10px;
+        left: 100px;
     }
 }
